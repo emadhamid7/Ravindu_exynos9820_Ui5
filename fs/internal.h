@@ -49,6 +49,14 @@ extern int __block_write_begin_int(struct page *page, loff_t pos, unsigned len,
  */
 extern void __init chrdev_init(void);
 
+#ifdef CONFIG_PROC_DLOG
+/*
+ * dlog_hook.c
+ */
+void dlog_hook(struct dentry *, struct inode *, struct path *);
+void dlog_hook_rmdir(struct dentry *, struct path *);
+#endif
+
 /*
  * namei.c
  */
@@ -75,6 +83,7 @@ extern int mnt_want_write_file_path(struct file *);
 extern void __mnt_drop_write(struct vfsmount *);
 extern void __mnt_drop_write_file(struct file *);
 extern void mnt_drop_write_file_path(struct file *);
+int path_umount(struct path *path, int flags);
 
 /*
  * fs_struct.c
